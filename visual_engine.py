@@ -124,3 +124,44 @@ def compare_search(target: int):
     print("BINARY SEARCH")
     print("=" * 45)
     animate_binary_search(arr, target)
+
+
+# 🔹 Binary Tree Traversal Animation
+def animate_tree():
+    tree = {
+        0: {"val": 10, "left": 1, "right": 2},
+        1: {"val": 5,  "left": 3, "right": 4},
+        2: {"val": 15, "left": 5, "right": 6},
+        3: {"val": 3,  "left": None, "right": None},
+        4: {"val": 7,  "left": None, "right": None},
+        5: {"val": 12, "left": None, "right": None},
+        6: {"val": 20, "left": None, "right": None},
+    }
+
+    def draw(visited: set):
+        lines = [
+            f"        {'['+str(tree[0]['val'])+']' if 0 in visited else str(tree[0]['val'])}",
+            f"       / \\",
+            f"     {'['+str(tree[1]['val'])+']' if 1 in visited else str(tree[1]['val'])}     {'['+str(tree[2]['val'])+']' if 2 in visited else str(tree[2]['val'])}",
+            f"    / \\   / \\",
+            f"  {'['+str(tree[3]['val'])+']' if 3 in visited else str(tree[3]['val'])}  {'['+str(tree[4]['val'])+']' if 4 in visited else str(tree[4]['val'])}  {'['+str(tree[5]['val'])+']' if 5 in visited else str(tree[5]['val'])}  {'['+str(tree[6]['val'])+']' if 6 in visited else str(tree[6]['val'])}",
+        ]
+        for line in lines:
+            print(line)
+        print()
+
+    # This order corresponds to preorder in your current code
+    order = [0, 1, 3, 4, 2, 5, 6]
+    visited = set()
+
+    print("\nTraversal (visual step-by-step)\n")
+    time.sleep(1)
+
+    for node in order:
+        visited.add(node)
+        draw(visited)
+        print(f"Visiting: {tree[node]['val']}\n")
+        time.sleep(1.2)
+
+    result = [tree[n]["val"] for n in order]
+    print(f"Traversal order: {result}")

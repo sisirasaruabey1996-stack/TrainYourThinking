@@ -10,6 +10,7 @@ from visual_engine import (
     animate_binary_search,
     animate_bubble_sort,
     compare_search,
+    animate_tree,
 )
 
 load_dotenv()
@@ -22,7 +23,6 @@ history = [
     {"role": "model", "parts": [{"text": "Understood. I will coach using Socratic method."}]}
 ]
 
-# Auto-detect variables
 current_topic = None
 topic_turn_count = 0
 STRUGGLE_THRESHOLD = 3
@@ -37,14 +37,12 @@ while True:
     if user == "quit":
         break
 
-    # Topic setter
     if user.startswith("topic:"):
         current_topic = user.replace("topic:", "").strip()
         topic_turn_count = 0
         print(f"Topic set: {current_topic}\n")
         continue
 
-    # Commands
     if user.startswith("studied:"):
         save_topic(user.replace("studied:", "").strip())
         print("Saved.\n")
@@ -74,7 +72,6 @@ while True:
         show_score()
         continue
 
-    # Visuals
     if user.startswith("visual:"):
         parts = user.replace("visual:", "").strip().split()
         target = int(parts[-1])
@@ -92,7 +89,10 @@ while True:
         compare_search(target)
         continue
 
-    # Auto-detect
+    if user == "tree":
+        animate_tree()
+        continue
+
     if current_topic:
         topic_turn_count += 1
         if topic_turn_count >= STRUGGLE_THRESHOLD:
@@ -100,7 +100,6 @@ while True:
             print(f"[Auto-detected struggle: {current_topic}]\n")
             topic_turn_count = 0
 
-    # Gemini call
     history.append({"role": "user", "parts": [{"text": user}]})
 
     response = client.models.generate_content(
@@ -120,6 +119,5 @@ while True:
 
     print(f"\nCoach: {reply}\n")
 
-    # Session logger
     with open(session_file, "a") as f:
         f.write(f"You: {user}\nCoach: {reply}\n\n")
