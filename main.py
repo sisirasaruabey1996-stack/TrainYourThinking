@@ -6,7 +6,11 @@ import os
 from tracker import save_topic, show_progress
 from weakness_tracker import log_topic, show_weaknesses
 from readiness_score import show_score
-from visual_engine import animate_binary_search, animate_bubble_sort
+from visual_engine import (
+    animate_binary_search,
+    animate_bubble_sort,
+    compare_search,
+)
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -70,7 +74,7 @@ while True:
         show_score()
         continue
 
-    # 🎯 Visual: binary search
+    # Visuals
     if user.startswith("visual:"):
         parts = user.replace("visual:", "").strip().split()
         target = int(parts[-1])
@@ -78,10 +82,14 @@ while True:
         animate_binary_search(arr, target)
         continue
 
-    # 🎯 Visual: bubble sort
     if user.startswith("sort:"):
         nums = list(map(int, user.replace("sort:", "").strip().split()))
         animate_bubble_sort(nums)
+        continue
+
+    if user.startswith("compare:"):
+        target = int(user.replace("compare:", "").strip())
+        compare_search(target)
         continue
 
     # Auto-detect
