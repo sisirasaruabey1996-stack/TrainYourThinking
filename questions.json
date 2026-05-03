@@ -1,0 +1,78 @@
+[
+  {
+    "id": "lc-704",
+    "title": "Binary Search",
+    "difficulty": "easy",
+    "topic": "arrays",
+    "pattern": "binary_search",
+    "link": "https://leetcode.com/problems/binary-search/",
+    "key_insight": "Divide search space in half using sorted property",
+    "optimal_tc": "O(log n)",
+    "optimal_sc": "O(1)",
+    "common_mistakes": [
+      "linear scan instead of binary search",
+      "wrong mid calculation",
+      "infinite loop"
+    ]
+  },
+  {
+    "id": "lc-121",
+    "title": "Best Time to Buy and Sell Stock",
+    "difficulty": "easy",
+    "topic": "arrays",
+    "pattern": "greedy",
+    "link": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+    "key_insight": "Track minimum price and maximize profit",
+    "optimal_tc": "O(n)",
+    "optimal_sc": "O(1)",
+    "common_mistakes": [
+      "trying all pairs",
+      "not tracking minimum properly"
+    ]
+  },
+  {
+    "id": "lc-226",
+    "title": "Invert Binary Tree",
+    "difficulty": "easy",
+    "topic": "trees",
+    "pattern": "recursion",
+    "link": "https://leetcode.com/problems/invert-binary-tree/",
+    "key_insight": "Swap left and right recursively",
+    "optimal_tc": "O(n)",
+    "optimal_sc": "O(h)",
+    "common_mistakes": [
+      "forgetting base case",
+      "incorrect swapping"
+    ]
+  },
+  {
+    "id": "lc-242",
+    "title": "Valid Anagram",
+    "difficulty": "easy",
+    "topic": "strings",
+    "pattern": "hashing",
+    "link": "https://leetcode.com/problems/valid-anagram/",
+    "key_insight": "Compare frequency counts",
+    "optimal_tc": "O(n)",
+    "optimal_sc": "O(1)",
+    "common_mistakes": [
+      "sorting instead of counting",
+      "ignoring edge cases"
+    ]
+  },
+  {
+    "id": "lc-217",
+    "title": "Contains Duplicate",
+    "difficulty": "easy",
+    "topic": "arrays",
+    "pattern": "hashing",
+    "link": "https://leetcode.com/problems/contains-duplicate/",
+    "key_insight": "Use set to detect duplicates",
+    "optimal_tc": "O(n)",
+    "optimal_sc": "O(n)",
+    "common_mistakes": [
+      "nested loops",
+      "not using hash set"
+    ]
+  }
+]
