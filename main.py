@@ -16,6 +16,11 @@ history = [
     {"role": "model", "parts": [{"text": "Understood. I will coach using Socratic method."}]}
 ]
 
+# 🔹 Auto-detect variables (Step 1)
+current_topic = None
+topic_turn_count = 0
+STRUGGLE_THRESHOLD = 3
+
 print("DSA Coach Agent — type 'quit' to exit\n")
 
 session_file = f"sessions/session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
@@ -26,8 +31,14 @@ while True:
     if user == "quit":
         break
 
-    # ✅ Intercept commands BEFORE Gemini
+    # 🔹 Topic setter for auto-detect
+    if user.startswith("topic:"):
+        current_topic = user.replace("topic:", "").strip()
+        topic_turn_count = 0
+        print(f"Topic set: {current_topic}\n")
+        continue
 
+    # 🔹 Command interception
     if user.startswith("studied:"):
         save_topic(user.replace("studied:", "").strip())
         print("Saved.\n")
@@ -53,8 +64,15 @@ while True:
         show_weaknesses()
         continue
 
-    # 🔹 Only real questions go to Gemini
+    # 🔹 Auto-detect turn counting
+    if current_topic:
+        topic_turn_count += 1
+        if topic_turn_count >= STRUGGLE_THRESHOLD:
+            log_topic(current_topic, struggled=True)
+            print(f"[Auto-detected struggle: {current_topic}]\n")
+            topic_turn_count = 0
 
+    # 🔹 Send to Gemini
     history.append({"role": "user", "parts": [{"text": user}]})
 
     response = client.models.generate_content(
@@ -74,6 +92,6 @@ while True:
 
     print(f"\nCoach: {reply}\n")
 
-    # Session logger
+    # 🔹 Session logger
     with open(session_file, "a") as f:
         f.write(f"You: {user}\nCoach: {reply}\n\n")
