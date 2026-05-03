@@ -37,12 +37,35 @@ while True:
     if user == "quit":
         break
 
+    # Topic setter
     if user.startswith("topic:"):
         current_topic = user.replace("topic:", "").strip()
         topic_turn_count = 0
         print(f"Topic set: {current_topic}\n")
         continue
 
+    # Help command
+    if user == "help":
+        print("""
+Commands
+─────────────────────────────
+topic: <name>     Set current topic
+struggled: <name> Log struggle manually  
+mastered: <name>  Log mastery manually
+weaknesses        Show weak areas
+progress          Show studied topics
+score             Show readiness score
+visual: <number>  Binary search animation
+sort: <numbers>   Bubble sort animation
+compare: <number> Linear vs binary search
+tree              Binary tree traversal
+help              Show this menu
+quit              Exit
+─────────────────────────────
+""")
+        continue
+
+    # Commands
     if user.startswith("studied:"):
         save_topic(user.replace("studied:", "").strip())
         print("Saved.\n")
@@ -72,6 +95,7 @@ while True:
         show_score()
         continue
 
+    # Visuals
     if user.startswith("visual:"):
         parts = user.replace("visual:", "").strip().split()
         target = int(parts[-1])
@@ -93,6 +117,7 @@ while True:
         animate_tree()
         continue
 
+    # Auto-detect
     if current_topic:
         topic_turn_count += 1
         if topic_turn_count >= STRUGGLE_THRESHOLD:
@@ -100,6 +125,7 @@ while True:
             print(f"[Auto-detected struggle: {current_topic}]\n")
             topic_turn_count = 0
 
+    # Gemini call
     history.append({"role": "user", "parts": [{"text": user}]})
 
     response = client.models.generate_content(
