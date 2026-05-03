@@ -1,3 +1,5 @@
+from datetime import datetime
+from pathlib import Path
 from google import genai
 from dotenv import load_dotenv
 import os
@@ -14,6 +16,9 @@ history = [
 ]
 
 print("DSA Coach Agent — type 'quit' to exit\n")
+
+session_file = f"sessions/session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+Path("sessions").mkdir(exist_ok=True)
 
 while True:
     user = input("You: ")
@@ -36,7 +41,17 @@ while True:
         contents=history
     )
 
-    reply = response.text
-    history.append({"role": "model", "parts": [{"text": reply}]})
+    try:
+        reply = response.text
+        if not reply or not reply.strip():
+            reply = "I need you to elaborate further. What are your thoughts?"
+    except Exception:
+        reply = "I need you to elaborate further. What are your thoughts?"
+
+    if reply.strip():
+        history.append({"role": "model", "parts": [{"text": reply}]})
 
     print(f"\nCoach: {reply}\n")
+
+    with open(session_file, "a") as f:
+        f.write(f"You: {user}\nCoach: {reply}\n\n")
