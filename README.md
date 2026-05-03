@@ -24,7 +24,7 @@
 | `quit` | Exit |
 
 ## Readiness Score
-Calculated from struggle rate across all topics.
+Calculated from struggle rate across all topics.  
 Updates automatically after every session.
 
 ## Run locally
@@ -32,9 +32,3 @@ Updates automatically after every session.
 git clone https://github.com/sisirasaruabey1996-stack/TrainYourThinking
 cd TrainYourThinking
 pip install -r requirements.txt
-cp .env.example .env  # add your Gemini API key
-python main.py
-```
-
-## Built by
-Sisira Saru Abey — DevOps Engineer transitioning to AI/ML
