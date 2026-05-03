@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 from tracker import save_topic, show_progress
 from weakness_tracker import log_topic, show_weaknesses
+from readiness_score import show_score
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -16,7 +17,7 @@ history = [
     {"role": "model", "parts": [{"text": "Understood. I will coach using Socratic method."}]}
 ]
 
-# 🔹 Auto-detect variables (Step 1)
+# 🔹 Auto-detect variables
 current_topic = None
 topic_turn_count = 0
 STRUGGLE_THRESHOLD = 3
@@ -31,14 +32,14 @@ while True:
     if user == "quit":
         break
 
-    # 🔹 Topic setter for auto-detect
+    # 🔹 Topic setter (auto-detect)
     if user.startswith("topic:"):
         current_topic = user.replace("topic:", "").strip()
         topic_turn_count = 0
         print(f"Topic set: {current_topic}\n")
         continue
 
-    # 🔹 Command interception
+    # 🔹 Command interception (ALL commands here)
     if user.startswith("studied:"):
         save_topic(user.replace("studied:", "").strip())
         print("Saved.\n")
@@ -64,7 +65,11 @@ while True:
         show_weaknesses()
         continue
 
-    # 🔹 Auto-detect turn counting
+    if user == "score":
+        show_score()
+        continue
+
+    # 🔹 Auto-detect turn count
     if current_topic:
         topic_turn_count += 1
         if topic_turn_count >= STRUGGLE_THRESHOLD:
