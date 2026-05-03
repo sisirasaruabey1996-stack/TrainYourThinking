@@ -1,6 +1,7 @@
 from interview_engine import load_questions
 from evaluation_engine import evaluate_answer
 from session import Session, QuestionResult
+from knowledge_model import update, increment_sessions
 import json
 import random
 
@@ -9,8 +10,6 @@ def run_interview():
     print("\n=== Mock Interview Session ===\n")
 
     all_questions = load_questions()
-
-    # pick 3 questions
     selected = random.sample(all_questions, 3)
 
     session = Session(
@@ -57,6 +56,8 @@ def run_interview():
             print(f"Feedback: {result['feedback']}\n")
 
             if result["verdict"] == "pass":
+
+                # ✅ SAVE RESULT IN SESSION
                 session.add_result(
                     QuestionResult(
                         question_id=q["id"],
@@ -66,6 +67,14 @@ def run_interview():
                         missed=result["missed"]
                     )
                 )
+
+                # 🔥 UPDATE KNOWLEDGE MODEL
+                update(
+                    topic=q["topic"],
+                    score=score,
+                    difficulty=q["difficulty"]
+                )
+
                 print("✅ Moving to next question...\n")
                 session.advance()
                 break
@@ -87,6 +96,9 @@ def run_interview():
         print("Verdict: BORDERLINE")
     else:
         print("Verdict: NOT READY")
+
+    # 🔥 INCREMENT SESSION COUNT
+    increment_sessions()
 
     print("\nDetailed Results:")
     for r in session.results:

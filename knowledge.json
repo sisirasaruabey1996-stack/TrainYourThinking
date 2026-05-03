@@ -1,0 +1,47 @@
+{
+  "topics": {
+    "strings": {
+      "attempts": 1,
+      "scores": [
+        8
+      ],
+      "avg": 8.0,
+      "last_3_avg": 8.0,
+      "trend": "new",
+      "can_solve_easy": true,
+      "can_solve_medium": false,
+      "can_solve_hard": false,
+      "common_mistakes": [],
+      "last_seen": "2026-05-03"
+    },
+    "arrays": {
+      "attempts": 1,
+      "scores": [
+        9
+      ],
+      "avg": 9.0,
+      "last_3_avg": 9.0,
+      "trend": "new",
+      "can_solve_easy": true,
+      "can_solve_medium": false,
+      "can_solve_hard": false,
+      "common_mistakes": [],
+      "last_seen": "2026-05-03"
+    },
+    "trees": {
+      "attempts": 1,
+      "scores": [
+        9
+      ],
+      "avg": 9.0,
+      "last_3_avg": 9.0,
+      "trend": "new",
+      "can_solve_easy": true,
+      "can_solve_medium": false,
+      "can_solve_hard": false,
+      "common_mistakes": [],
+      "last_seen": "2026-05-03"
+    }
+  },
+  "sessions_completed": 1
+}
