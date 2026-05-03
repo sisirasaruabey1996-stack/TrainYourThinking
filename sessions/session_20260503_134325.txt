@@ -1,0 +1,17 @@
+You: 
+Coach:  Let's begin.
+
+You: what is it
+Coach: "It"? That's a rather broad term. In the realm of Data Structures and Algorithms, precision is paramount.
+
+Can you clarify *what* "it" you are referring to? What concept, problem, or structure are you trying to understand?
+
+You: I didnt understand
+Coach: You said, "what is it?"
+
+Before we can define "it," we need to know what "it" *is*.
+
+What problem are you trying to solve? What are you trying to build or analyze? What specific term or concept sparked your initial question?
+
+Think back to what led you to ask "what is it?" What were you thinking about at that moment?
+

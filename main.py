@@ -6,6 +6,7 @@ import os
 from tracker import save_topic, show_progress
 from weakness_tracker import log_topic, show_weaknesses
 from readiness_score import show_score
+from visual_engine import animate_binary_search
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -17,7 +18,7 @@ history = [
     {"role": "model", "parts": [{"text": "Understood. I will coach using Socratic method."}]}
 ]
 
-# 🔹 Auto-detect variables
+# Auto-detect variables
 current_topic = None
 topic_turn_count = 0
 STRUGGLE_THRESHOLD = 3
@@ -32,14 +33,14 @@ while True:
     if user == "quit":
         break
 
-    # 🔹 Topic setter (auto-detect)
+    # Topic setter
     if user.startswith("topic:"):
         current_topic = user.replace("topic:", "").strip()
         topic_turn_count = 0
         print(f"Topic set: {current_topic}\n")
         continue
 
-    # 🔹 Command interception (ALL commands here)
+    # Commands
     if user.startswith("studied:"):
         save_topic(user.replace("studied:", "").strip())
         print("Saved.\n")
@@ -69,7 +70,15 @@ while True:
         show_score()
         continue
 
-    # 🔹 Auto-detect turn count
+    # 🎯 Visual command
+    if user.startswith("visual:"):
+        parts = user.replace("visual:", "").strip().split()
+        target = int(parts[-1])
+        arr = list(range(2, 22, 2))
+        animate_binary_search(arr, target)
+        continue
+
+    # Auto-detect
     if current_topic:
         topic_turn_count += 1
         if topic_turn_count >= STRUGGLE_THRESHOLD:
@@ -77,7 +86,7 @@ while True:
             print(f"[Auto-detected struggle: {current_topic}]\n")
             topic_turn_count = 0
 
-    # 🔹 Send to Gemini
+    # Gemini call
     history.append({"role": "user", "parts": [{"text": user}]})
 
     response = client.models.generate_content(
@@ -97,6 +106,6 @@ while True:
 
     print(f"\nCoach: {reply}\n")
 
-    # 🔹 Session logger
+    # Session logger
     with open(session_file, "a") as f:
         f.write(f"You: {user}\nCoach: {reply}\n\n")
