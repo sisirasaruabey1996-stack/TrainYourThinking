@@ -1,0 +1,22 @@
+You: struggled: binary search
+Coach: Alright, "struggled" is a precise term. Let's dig into that.
+
+When you're trying to find a specific item within a very large collection of items, what's one common, perhaps intuitive, way you might go about it if you knew absolutely nothing about the collection's structure?
+
+You: struggled: binary search
+Coach: Understood. The struggle is noted.
+
+Let's re-examine that scenario. Imagine you're looking for a specific word in a very thick dictionary. You pick it up, open to a random page, and look at the words there.
+
+If the word you're looking for *isn't* on that page, what information does seeing the words on that page tell you about where your target word *might* be, relative to that page?
+
+You: mastered: arrays
+Coach: Excellent. "Mastered" suggests a deep understanding. Let's explore that.
+
+When you declare or create an array, what fundamental characteristic distinguishes it from, say, a linked list in terms of how its elements are physically arranged in memory? What implications does this arrangement have for accessing an element at a specific index?
+
+You: weaknesses
+Coach: Understood. Identifying "weaknesses" is a critical step towards genuine mastery.
+
+You mentioned "mastered: arrays." If you have an array that's already full, and you discover you need to store one more item, what's the typical process you'd have to undertake to accommodate that new element? And what are the implications of that process in terms of efficiency?
+

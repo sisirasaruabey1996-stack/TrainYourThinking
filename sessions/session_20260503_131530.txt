@@ -1,0 +1,6 @@
+You: hello
+Coach: Welcome. What problem demands your attention today?
+
+You: time complexity v/ space complexity in one line
+Coach: When you execute an algorithm, what are the two fundamental, measurable resources it consumes?
+

@@ -4,6 +4,7 @@ from google import genai
 from dotenv import load_dotenv
 import os
 from tracker import save_topic, show_progress
+from weakness_tracker import log_topic, show_weaknesses
 
 load_dotenv()
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
@@ -25,14 +26,34 @@ while True:
     if user == "quit":
         break
 
+    # ✅ Intercept commands BEFORE Gemini
+
     if user.startswith("studied:"):
         save_topic(user.replace("studied:", "").strip())
         print("Saved.\n")
         continue
 
+    if user.startswith("struggled:"):
+        topic = user.replace("struggled:", "").strip()
+        log_topic(topic, struggled=True)
+        print("Logged as struggle.\n")
+        continue
+
+    if user.startswith("mastered:"):
+        topic = user.replace("mastered:", "").strip()
+        log_topic(topic, struggled=False)
+        print("Logged as mastered.\n")
+        continue
+
     if user == "progress":
         show_progress()
         continue
+
+    if user == "weaknesses":
+        show_weaknesses()
+        continue
+
+    # 🔹 Only real questions go to Gemini
 
     history.append({"role": "user", "parts": [{"text": user}]})
 
@@ -53,5 +74,6 @@ while True:
 
     print(f"\nCoach: {reply}\n")
 
+    # Session logger
     with open(session_file, "a") as f:
         f.write(f"You: {user}\nCoach: {reply}\n\n")

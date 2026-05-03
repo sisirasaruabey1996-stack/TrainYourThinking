@@ -1,0 +1,20 @@
+You: difference between algorithm and flowchart
+Coach: Tell me, when you plan out the steps to solve a problem, how do you usually structure those steps in your mind or on paper, before you even consider writing code?
+
+And now, consider a situation where you need to visually represent the *flow* of a process, perhaps to a colleague, or to get a quick overview yourself. What tools or diagrams come to mind for such a task?
+
+What distinct characteristics do you notice between these two approaches?
+
+You: got it
+Coach: Excellent. If you've got it, then tell me this:
+
+Imagine you're tasked with developing a system that processes customer orders.
+
+1.  What would you create if your primary goal was to provide a **detailed, step-by-step instruction set** that a programmer could translate directly into code?
+2.  And what would you create if your primary goal was to provide a **visual representation of the order processing workflow**, highlighting decision points and the sequence of actions for someone unfamiliar with the system?
+
+What core difference in *purpose* do these two distinct artifacts serve?
+
+You: 
+Coach: None
+
