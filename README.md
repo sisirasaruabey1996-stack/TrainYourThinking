@@ -92,3 +92,122 @@ The answer: build the coach yourself.
 ---
 
 ## Project structure
+
+    TrainYourThinking/
+    │
+    ├── main.py                  # CLI DSA coach (Socratic)
+    ├── app.py                   # Streamlit GUI
+    ├── interview_cli.py         # Mock interview engine
+    ├── visual_engine.py         # Algorithm animations
+    ├── tracker.py               # Progress tracker
+    ├── weakness_tracker.py      # Weakness detection
+    ├── weakness.json            # Persisted weakness data
+    ├── knowledge_model.py       # Cross-session knowledge
+    ├── knowledge.json           # Persisted knowledge data
+    ├── decision_engine.py       # Adaptive difficulty routing
+    ├── readiness_score.py       # 0-100 score calculator
+    ├── session.py               # Session state management
+    ├── questions.json           # Curated question bank
+    ├── requirements.txt
+    ├── .env.example
+    └── sessions/                # Auto-saved conversations
+
+---
+
+## Run locally
+
+    git clone https://github.com/sisirasaruabey1996-stack/TrainYourThinking
+    cd TrainYourThinking
+    pip install -r requirements.txt
+    cp .env.example .env
+    # Add your Gemini API key to .env
+
+**CLI Coach (Socratic mode):**
+
+    python main.py
+
+**Web GUI:**
+
+    streamlit run app.py
+
+**Mock Interview (CLI):**
+
+    python interview_cli.py
+
+---
+
+## CLI commands
+
+| Command | Action |
+|---|---|
+| `topic: binary search` | Set current topic |
+| `struggled: arrays` | Log struggle manually |
+| `mastered: arrays` | Log mastery manually |
+| `weaknesses` | Show weak areas + struggle rate |
+| `progress` | Show all studied topics |
+| `score` | Show readiness score (0–100) |
+| `visual: 14` | Animate binary search |
+| `sort: 5 3 8 1 4` | Animate bubble sort |
+| `compare: 14` | Linear vs binary comparison |
+| `tree` | Binary tree traversal animation |
+| `knowledge` | Full topic knowledge model |
+| `help` | Show all commands |
+| `quit` | Exit |
+
+---
+
+## How evaluation works
+
+Every answer is scored by Gemini 2.5 Flash acting as a Google L5 interviewer:
+
+    Correctness  → Is the core approach right?          (0–4)
+    Complexity   → Did you state time AND space?         (0–2)
+    Edge Cases   → Did you name specific edge cases?     (0–2)
+    Clarity      → Was the explanation well structured?  (0–2)
+
+Pre-checks run before the LLM call — regex detection of complexity
+terms and edge case keywords — used as signals to improve accuracy.
+
+**Verdict thresholds:**
+- Pass = total ≥ 8
+- Borderline = total 5–7
+- Fail = total ≤ 4
+
+---
+
+## Get your API key
+
+1. Go to [aistudio.google.com](https://aistudio.google.com)
+2. Create a free API key
+3. Add to `.env`:
+
+        GEMINI_API_KEY=your_key_here
+
+---
+
+## Built by
+
+**Sisira Saru Abey**  
+DevOps Engineer at Siemens Advanta → transitioning to AI/ML
+
+This project was built from scratch during Week 1 of learning Python.  
+No ML background. No formal AI training. Just a clear goal and daily commits.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/sisira-saru-abey-b918b6241)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black)](https://github.com/sisirasaruabey1996-stack)
+
+---
+
+## Roadmap
+
+- [ ] Voice input (SpeechRecognition)
+- [ ] Spaced repetition scheduler (SM-2 algorithm)
+- [ ] ML curriculum track (Python → Deep Learning → System Design)
+- [ ] Google readiness prediction chart (improvement over time)
+- [ ] Deploy to Streamlit Cloud (public demo)
+
+---
+
+> *"I built a system to prepare for the interview.*  
+> *Then I used the system to prepare for the interview.*  
+> *That's the project."*
