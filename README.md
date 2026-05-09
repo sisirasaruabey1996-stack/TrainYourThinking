@@ -1,6 +1,6 @@
 # TrainYourThinking 🧠
 > An AI-powered, full-stack interview preparation system built to crack 
-> MAANG-level interviews — designed, built, and used by a DevOps engineer 
+> Designed, built, and used by a DevOps engineer 
 > transitioning into AI/ML with zero prior ML experience.
 
 ---
